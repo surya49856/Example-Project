@@ -1,0 +1,42 @@
+task("sayHello") {
+    group = "Gradle lab"
+    description = "Says 'Hello'"
+    dependsOn = ["printTime"]
+    doLast {
+        println "Hello!"
+    }
+}
+task("sayBye"){
+    group="Gradle lab"
+    description="Says Bye"
+    dependsOn = ["printTime"]
+    mustRunAfter = ["sayHello"]
+    doLast {
+        println "Bye!"
+    }
+}
+task("callPivotal"){
+    group="Gradle lab"
+    description="Say Pivotal"
+    doLast {
+        println "Pivotal!"
+    }
+}
+//No Circular dependency
+
+task("printTime") {
+    group = "Gradle lab"
+    description = "Prints the current time"
+    doLast {
+        println new Date()
+    }
+    task("Comment"){
+        group="gradle "
+        description="Prints the comments"
+        dependsOn=["printTime"]
+       doLast {
+           println "Comments!"
+       }
+
+    }
+}
